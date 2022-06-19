@@ -75,15 +75,27 @@
       }
 
       function switchToBreakScene() {
-        if (window.obsstudio) {
-          window.obsstudio.setCurrentScene("Break");
+        if (!window.obsstudio) {
+          return;
         }
+        window.obsstudio.getCurrentScene((scene) => {
+          if (scene.name !== "Work") {
+            return;
+          }
+          window.obsstudio.setCurrentScene("Break");
+        });
       }
 
       function switchToWorkScene() {
-        if (window.obsstudio) {
-          window.obsstudio.setCurrentScene("Work");
+        if (!window.obsstudio) {
+          return;
         }
+        window.obsstudio.getCurrentScene((scene) => {
+          if (scene.name !== "Break") {
+            return;
+          }
+          window.obsstudio.setCurrentScene("Work");
+        });
       }
 
       function displayState(parameters) {
